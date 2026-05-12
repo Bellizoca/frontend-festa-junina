@@ -847,7 +847,13 @@
             try {
                 const response = await fetch(`${API_URL}/produtos?categoria=${categoriaId}`);
                 if (!response.ok) throw new Error(`HTTP ${response.status} ${response.statusText}`);
-                const produtos = await response.json();
+                const text = await response.text();
+                if (!text) {
+                    renderizarProdutos([]);
+                    return;
+                }
+                const produtos = JSON.parse(text);
+                if (!Array.isArray(produtos)) throw new Error(`Resposta inesperada: ${JSON.stringify(produtos)}`);
                 renderizarProdutos(produtos);
             } catch (error) {
                 console.error('Erro ao carregar produtos:', error);
