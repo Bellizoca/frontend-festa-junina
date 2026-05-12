@@ -802,6 +802,7 @@
         async function carregarCategorias() {
             try {
                 const response = await fetch(`${API_URL}/categorias`);
+                if (!response.ok) throw new Error(`HTTP ${response.status} ${response.statusText}`);
                 categoriasData = await response.json();
                 renderizarBotoesCategorias();
                 if (categoriasData.length > 0) {
@@ -845,6 +846,7 @@
             listaProdutos.innerHTML = '<div style="grid-column:1/-1;"><div class="spinner"></div></div>';
             try {
                 const response = await fetch(`${API_URL}/produtos?categoriaId=${categoriaId}`);
+                if (!response.ok) throw new Error(`HTTP ${response.status} ${response.statusText}`);
                 const produtos = await response.json();
                 renderizarProdutos(produtos);
             } catch (error) {
