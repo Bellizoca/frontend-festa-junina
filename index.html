@@ -845,7 +845,7 @@
         async function carregarProdutos(categoriaId) {
             listaProdutos.innerHTML = '<div style="grid-column:1/-1;"><div class="spinner"></div></div>';
             try {
-                const response = await fetch(`${API_URL}/produtos?categoria=${categoriaId}`);
+                const response = await fetch(`${API_URL}/produtos?categoriaId=${categoriaId}`);
                 if (!response.ok) throw new Error(`HTTP ${response.status} ${response.statusText}`);
                 const text = await response.text();
                 if (!text) {
