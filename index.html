@@ -845,7 +845,7 @@
         async function carregarProdutos(categoriaId) {
             listaProdutos.innerHTML = '<div style="grid-column:1/-1;"><div class="spinner"></div></div>';
             try {
-                const response = await fetch(`${API_URL}/produtos?categoriaId=${categoriaId}`);
+                const response = await fetch(`${API_URL}/produtos?categoriaid=${categoriaId}`);
                 if (!response.ok) throw new Error(`HTTP ${response.status} ${response.statusText}`);
                 const text = await response.text();
                 if (!text) {
@@ -869,9 +869,9 @@
             }
             produtos.forEach(p => {
                 const precoFormatado = p.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-                const imgSource = (p.imagem && p.imagem.startsWith('http'))
-                    ? p.imagem
-                    : `./assets/images/${p.imagem || 'logo.png'}`;
+                const imgSource = (p.imagem_url && p.imagem_url.startsWith('http'))
+                    ? p.imagem_url
+                    : `./assets/images/${p.imagem_url || 'logo.png'}`;
 
                 const card = document.createElement('div');
                 card.className = 'card-produto';
